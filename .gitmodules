@@ -1,3 +1,0 @@
-[submodule "lib/Zend"]
-	path = lib/Zend
-	url = git@github.com:bedeabza/Zend-Framework-1.git

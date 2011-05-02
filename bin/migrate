@@ -2,7 +2,8 @@
 //define needed constants
 defined('DS') 				|| define('DS', DIRECTORY_SEPARATOR);
 defined('ROOT_PATH')        || define('ROOT_PATH', dirname(__DIR__));
-defined('CONFIG_PATH') 		|| define('CONFIG_PATH', ROOT_PATH . DS . 'config');
+defined('APPLICATION_PATH')	|| define('APPLICATION_PATH', ROOT_PATH . DS . 'app');
+defined('CONFIG_PATH') 		|| define('CONFIG_PATH', APPLICATION_PATH . DS . 'config');
 defined('LIBRARY_PATH')     || define('LIBRARY_PATH', ROOT_PATH . DS . 'lib');
 
 //set include path for autoloading
@@ -16,10 +17,11 @@ ini_set('display_errors','On');
 require_once 'Zend'. DS .'Loader' . DS . 'Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Mig_');
+$autoloader->registerNamespace('Ws_');
 
 //connect to the database with the application's config file
 //you can pass the database details also manual
-$config = new Zend_Config_Xml(CONFIG_PATH . DS . 'database.xml', 'development');
+$config = new Zend_Config_Xml(CONFIG_PATH . DS . 'application.xml', 'development');
 
-Mig_Manager::init(ROOT_PATH . DS . 'data', $config->adapter, $config->params->toArray());
+Mig_Manager::init(ROOT_PATH . DS . 'db', 'Mysql', $config->resources->db->params->toArray());
 Mig_Manager::dispatch();
