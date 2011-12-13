@@ -132,19 +132,16 @@ class Mig_Sequencer
 			return;
 		}
 		$adapter = Mig_Manager::getAdapter();
-		$adapter->beginTransaction();
 		try{
 			foreach($sequence as $version => $s){
+                Mig_Printer::pr('Executing version '.$version);
 				call_user_func_array(array($s, $method), array());
-				$achievedVersion = $method == 'down' ? $this->lookupPrevVersion($version) : $version;
-			}
-			$adapter->commit();
+                Mig_Manager::setCurrentVersion($method == 'down' ? $this->lookupPrevVersion($version) : $version);
+            }
 		}catch(Exception $e){
-			$adapter->rollback();
 			Mig_Printer::pr('Error encountered (current version '.$achievedVersion.'): '.$e->getMessage()."\n");
 		}
 
-		Mig_Manager::setCurrentVersion($achievedVersion);
 		Mig_Printer::pr("\n=== MIGRATION ENDED ============================================");
 	}
 

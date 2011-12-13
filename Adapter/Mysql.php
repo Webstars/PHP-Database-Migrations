@@ -184,6 +184,7 @@ class Mig_Adapter_Mysql extends Mig_Adapter_Abstract
 		$fullOptions = array(
 			'table' => $table,
 			'column' => $column,
+            'options' => $options
 		);
 		switch($type)
 		{
@@ -225,7 +226,7 @@ class Mig_Adapter_Mysql extends Mig_Adapter_Abstract
 		try{
 			$this->query("ALTER TABLE {$table} DROP INDEX ".$index);
 
-			parent::dropIndex($table, $name);
+			parent::dropIndex($table, $index);
 			return "Dropped index {$index} from table {$table}\n";
 		}catch(Mig_Exception $e){
 			throw new Mig_Exception($e->getMessage());

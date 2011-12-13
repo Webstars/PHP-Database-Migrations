@@ -91,7 +91,7 @@ class Mig_Object_Index extends Mig_Object_Abstract
 		}
 		if($this->_info['key'] || $this->_info['index'] || $this->_info['foreign']){
 			$name = $this->_adapter->quoteIdentifier($identifier.'_key');
-			$return[] = 'KEY '.$name.' ('.$this->_adapter->quoteIdentifier($this->_identifier).')';
+			$return[] = 'KEY '.$name.' ('.$this->_adapter->quoteIdentifier($this->_identifier).($this->_info['options']['length'] ? ' ('.$this->_info['options']['length'].')' : '').')';
 		}
 		if($this->_info['fulltext']){
 			$name = $this->_adapter->quoteIdentifier('fti_'.$identifier);
