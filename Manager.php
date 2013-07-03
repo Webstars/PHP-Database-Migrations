@@ -294,6 +294,10 @@ final class Mig_Manager
 					Mig_Printer::pr('Error: '.$e->getMessage());
 				}
 				break;
+			case 'current':
+				Mig_Printer::pr('current version = '.self::getCurrentVersion());
+				return;
+			break;
 		}
 	}
 
