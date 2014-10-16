@@ -166,6 +166,7 @@ class Mig_Sequencer
 		}else{
 			throw new Mig_Exception('The specified resource is not a directory: '.$dir);
 		}
+		sort($files);
 		return $files;
 	}
 
