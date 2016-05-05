@@ -15,7 +15,7 @@ abstract class Mig_Adapter_Abstract
 	* @var mixed
 	*/
 	public static $pdo = array(
-		'Mysql'		=> 'Pdo_Mysql'
+		'Mysql'		=> 'Mysql'
 	);
 
 	/**
