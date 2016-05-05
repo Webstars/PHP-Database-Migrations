@@ -9,7 +9,12 @@
 
 final class Mig_Migration_Factory
 {
-	public static function create($name)
+    /**
+     * @param $name
+     * @param array $bodies
+     * @return bool|string
+     */
+    public static function create($name, $bodies = array())
 	{
 		$file = Mig_Manager::getMigrationStorage() . DS . $name .'.php';
 		$class = 'Migration_'.((int)$name);
@@ -19,12 +24,12 @@ final class Mig_Migration_Factory
 		$contents[] = '{';
 		$contents[] = "\tpublic function up()";
 		$contents[] = "\t{";
-		$contents[] = "\t\t";
+		$contents[] = $bodies['up'] ?: "\t\t";
 		$contents[] = "\t}";
 		$contents[] = "";
 		$contents[] = "\tpublic function down()";
 		$contents[] = "\t{";
-		$contents[] = "\t\t";
+		$contents[] = $bodies['down'] ?: "\t\t";
 		$contents[] = "\t}";
 		$contents[] = '}';
 
