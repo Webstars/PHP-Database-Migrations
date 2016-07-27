@@ -98,7 +98,7 @@ class Mig_Object_Index extends Mig_Object_Abstract
 			$return[] = 'FULLTEXT '.$name.' ('.$this->_identifier.')';
 		}
 		if($this->_info['foreign']){
-			$name = $this->_adapter->quoteIdentifier((strlen($this->_info['table']) > 40 ? '' : $this->_info['table'])."_ibfk_".$identifier);
+			$name = $this->_adapter->quoteIdentifier((strlen($this->_info['table']) > 40 ? md5($this->_info['table']) : $this->_info['table'])."_ibfk_".$identifier);
 			$return1 = "";
 			$return1.= "CONSTRAINT {$name} FOREIGN KEY (".$this->_adapter->quoteIdentifier($this->_identifier).") REFERENCES ".$this->_adapter->quoteIdentifier($this->_info['foreign']['table'])." (".$this->_adapter->quoteIdentifier($this->_info['foreign']['column']).")";
 			if($delete = $this->_info['foreign']['delete'])
